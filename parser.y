@@ -4,6 +4,7 @@
 
     extern int yylex();
     void yyerror(const char *s);
+    int errores = 0;
 %}
 
 %token DEFINE
@@ -33,6 +34,7 @@ sentencia
         : definicion '\n'
         | impresion '\n'
         | '\n'
+        | error '\n'       { yyerrok; }
         ;
 
 definicion
@@ -44,10 +46,8 @@ impresion
         ;
 
 valor
-        : NUMERO
-        | CADENA
+        : CADENA
         | FECHA
-        | VARIABLE
         | expresion
         ;
 
@@ -68,17 +68,23 @@ factor
 
 %%
 
+extern int yylineno;
 void yyerror(const char *s)
 {
-    printf("Error sintactico: %s\n", s);
+    errores++;
+    printf("Error sintactico en linea %d: %s\n", yylineno, s);
 }
 
 int main()
 {
     printf("Analizando...\n");
 
-    if(yyparse()==0)
+    yyparse();
+
+    if(errores == 0)
         printf("Sintaxis correcta\n");
+    else
+        printf("Se encontraron %d errores\n", errores);
 
     return 0;
 }

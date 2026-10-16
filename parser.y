@@ -1,27 +1,23 @@
 %{
-    #include <stdio.h>
-    #include <stdlib.h>
+#include <stdio.h>
 
-    extern int yylex();
-    void yyerror(const char *s);
-    int errores = 0;
+int yylex(void);
+void yyerror(const char *s);
+
+extern int yylineno;
+int errores = 0;
 %}
 
-%token DEFINE
-%token PRINT
+%token TIPO VARIABLE
+%token ENTERO DECIMAL CARACTER BOOLEANO
+%token SUMA RESTA MULT DIV
+%token IGUAL MENOR MAYOR
+%token ASIGNACION PUNTOYCOMA
 
-%token VARIABLE
-%token NUMERO
-%token CADENA
-%token FECHA
-
-%token SUMA
-%token MULT
-
-%left SUMA
-%left MULT
-
-%start programa
+%left IGUAL
+%left MENOR MAYOR
+%left SUMA RESTA
+%left MULT DIV
 
 %%
 
@@ -31,57 +27,48 @@ programa
         ;
 
 sentencia
-        : definicion '\n'
-        | impresion '\n'
-        | '\n'
-        | error '\n'       { yyerrok; }
-        ;
-
-definicion
-        : DEFINE VARIABLE valor
-        ;
-
-impresion
-        : PRINT valor
-        ;
-
-valor
-        : CADENA
-        | FECHA
-        | expresion
+        : TIPO VARIABLE ASIGNACION expresion PUNTOYCOMA
+              { printf("Linea %d: declaracion correcta\n", yylineno); }
+        | VARIABLE ASIGNACION expresion PUNTOYCOMA
+              { printf("Linea %d: asignacion correcta\n", yylineno); }
+        | error PUNTOYCOMA
+              { yyerrok; }
         ;
 
 expresion
-        : expresion SUMA termino
-        | termino
+        : expresion SUMA expresion
+        | expresion RESTA expresion
+        | expresion MULT expresion
+        | expresion DIV expresion
+        | expresion IGUAL expresion
+        | expresion MENOR expresion
+        | expresion MAYOR expresion
+        | valor
         ;
 
-termino
-        : termino MULT factor
-        | factor
-        ;
-
-factor
-        : NUMERO
+valor
+        : ENTERO
+        | DECIMAL
+        | CARACTER
+        | BOOLEANO
         | VARIABLE
         ;
 
 %%
 
-extern int yylineno;
 void yyerror(const char *s)
 {
     errores++;
     printf("Error sintactico en linea %d: %s\n", yylineno, s);
 }
 
-int main()
+int main(void)
 {
     printf("Analizando...\n");
 
     yyparse();
 
-    if(errores == 0)
+    if (errores == 0)
         printf("Sintaxis correcta\n");
     else
         printf("Se encontraron %d errores\n", errores);

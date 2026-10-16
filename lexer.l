@@ -8,25 +8,31 @@
 
 %%
 
-DEFINE                         { return DEFINE; }
-PRINT                          { return PRINT; }
+"entero"            { return TIPO; }
+"decimal"           { return TIPO; }
+"caracter"          { return TIPO; }
+"booleano"          { return TIPO; }
 
-[0-9]{2}"/"[0-9]{2}"/"[0-9]{4}  { return FECHA; }
+"verdadero"         { return BOOLEANO; }
+"falso"             { return BOOLEANO; }
 
-\"[^\"]*\"                     { return CADENA; }
+[0-9]+"."[0-9]+     { return DECIMAL; }
+[0-9]+              { return ENTERO; }
+'.'                 { return CARACTER; }
 
-[0-9]+(\.[0-9]+)?             { return NUMERO; }
+[a-z]+              { return VARIABLE; }
 
-[a-zA-Z_][a-zA-Z0-9_]*        { return VARIABLE; }
+"+"                 { return SUMA; }
+"-"                 { return RESTA; }
+"*"                 { return MULT; }
+"/"                 { return DIV; }
+"=="                { return IGUAL; }
+"="                 { return ASIGNACION; }
+"<"                 { return MENOR; }
+">"                 { return MAYOR; }
+";"                 { return PUNTOYCOMA; }
 
-"+"                            { return SUMA; }
-
-"*"                            { return MULT; }
-
-[ \t\r]+                       ;
-
-\n                             { return '\n'; }
-
-.                              { return yytext[0]; }
+[ \t\r\n]           { }
+.                   { printf("Error lexico en linea %d: '%s' no se reconoce\n", yylineno, yytext); }
 
 %%

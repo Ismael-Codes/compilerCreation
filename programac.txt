@@ -3,4 +3,5 @@ Npd promedio = 9.1;
 let grupo = 'A';
 logic inscrito = true;
 edad = edad + 1;
+
 imp "Hola mundo";

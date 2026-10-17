@@ -44,10 +44,8 @@ impresion
         ;
 
 valor
-        : NUMERO
-        | CADENA
+        : CADENA
         | FECHA
-        | VARIABLE
         | expresion
         ;
 

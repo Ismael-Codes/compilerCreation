@@ -10,7 +10,7 @@
 DEFINE                         { return DEFINE; }
 PRINT                          { return PRINT; }
 
-[0-9]{2}/[0-9]{2}/[0-9]{4}    { return FECHA; }
+[0-9]{2}"/"[0-9]{2}"/"[0-9]{4}    { return FECHA; }
 
 \"[^\"]*\"                     { return CADENA; }
 

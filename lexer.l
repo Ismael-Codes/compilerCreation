@@ -54,7 +54,11 @@ int num_linea = 1; /* Contador de lineas para reportar errores */
 ">"                 { fprintf(yyout, "MAYOR "); }
 ";"                 { fprintf(yyout, "PUNTOYCOMA "); }
 
-/////
+  /* ============================================================
+     * 6. ESPACIOS Y SALTOS DE LINEA
+     * ============================================================ */
+[ \t]+              { /* Ignorar espacios y tabuladores */ }
+\r?\n               { fprintf(yyout, "\n"); num_linea++; }
 
 %%
 

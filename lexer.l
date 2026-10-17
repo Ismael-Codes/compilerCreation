@@ -69,5 +69,19 @@ int num_linea = 1; /* Contador de lineas para reportar errores */
 %%
 
 int main(void) {
+    yyin = fopen("programa.txt", "r");
+    yyout = fopen("out.txt", "w");
+
+    if (!yyin) { perror("No se pudo abrir programa.txt"); return 1; }
+
+    /* <--- [BUENA PRACTICA EN C]: Si "programa.txt" si abrio pero "out.txt" falla,
+     * el return 1 sale del programa dejando "yyin" abierto en memoria.
+     * Lo ideal es hacer: if (!yyout) { perror("..."); fclose(yyin); return 1; } */
+    if (!yyout) { perror("No se pudo abrir out.txt"); return 1; }
+
+    yylex();
+
+    fclose(yyin);
+    fclose(yyout);
     return 0;
 }

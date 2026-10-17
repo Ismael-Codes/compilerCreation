@@ -1,8 +1,9 @@
-
-DEFINE abc 3.14
-DEFINE mnp "Hola mundo"
-DEFINE xyz 12/03/2024
-asasd asdasd asdas
-PRINT "Mi primer programa"
-PRINT 10 + abc
-PRINT "Fin" * "End"
+entero edad = 20;
+decimal precio = 9.99;
+caracter letra = 'a';
+booleano activo = verdadero;
+edad = edad + 5 * 2;
+activo = edad > 18;
+entero = 5;
+precio = precio / 2
+edad = edad - 1;

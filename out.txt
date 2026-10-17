@@ -1,8 +1,10 @@
-
-DEFINE  VARIABLE  NUMERO 
-DEFINE  VARIABLE  CADENA 
-DEFINE  VARIABLE  FECHA 
-VARIABLE  VARIABLE  VARIABLE 
-PRINT  CADENA 
-PRINT  NUMERO  SUMA  VARIABLE 
-PRINT  CADENA  MULT  CADENA 
+Analizando...
+Linea 1: declaracion correcta
+Linea 2: declaracion correcta
+Linea 3: declaracion correcta
+Linea 4: declaracion correcta
+Linea 5: asignacion correcta
+Linea 6: asignacion correcta
+Error sintactico en linea 7: syntax error
+Error sintactico en linea 9: syntax error
+Se encontraron 2 errores

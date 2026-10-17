@@ -1,31 +1,34 @@
 %{
 #include <stdio.h>
-#include "parser.tab.h"
+
+int num_linea = 1; /* Contador de lineas para reportar errores */
 %}
 
 %option noyywrap
 
 %%
 
-DEFINE                         { return DEFINE; }
-PRINT                          { return PRINT; }
+/* ============================================================
+  * 1. COMENTARIOS
+* ============================================================ */
+"//"[^\n]*          { fprintf(yyout, "COMENTARIO "); }
 
-[0-9]{2}/[0-9]{2}/[0-9]{4}    { return FECHA; }
+/* ============================================================
+     * 2. PALABRAS RESERVADAS
+* ============================================================ */
+"Ent"               { fprintf(yyout, "TIPO "); }
+"real"              { fprintf(yyout, "TIPO "); }
+"letra"             { fprintf(yyout, "TIPO "); }
+"logico"            { fprintf(yyout, "TIPO "); }
+"texto"             { fprintf(yyout, "TIPO "); }
 
-\"[^\"]*\"                     { return CADENA; }
+"mostrar"           { fprintf(yyout, "MOSTRAR "); }
+"definir"           { fprintf(yyout, "DEFINE "); }
 
-[0-9]+(\.[0-9]+)?             { return NUMERO; }
-
-[a-zA-Z_][a-zA-Z0-9_]*        { return VARIABLE; }
-
-"+"                            { return SUMA; }
-
-"*"                            { return MULT; }
-
-[ \t\r]+                       ;
-
-\n                             { return '\n'; }
-
-.                              { return yytext[0]; }
-
+"activo"            { fprintf(yyout, "BOOLEANO "); }
+"inactivo"          { fprintf(yyout, "BOOLEANO "); }
 %%
+
+int main(void) {
+    return 0;
+}

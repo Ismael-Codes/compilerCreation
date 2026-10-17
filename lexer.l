@@ -60,6 +60,12 @@ int num_linea = 1; /* Contador de lineas para reportar errores */
 [ \t]+              { /* Ignorar espacios y tabuladores */ }
 \r?\n               { fprintf(yyout, "\n"); num_linea++; }
 
+/* ============================================================
+     * 7. ERRORES LEXICOS
+* ============================================================ */
+.                   { printf("Error lexico en linea %d: '%s' no se reconoce\n", num_linea, yytext);
+                      fprintf(yyout, "ERROR "); }
+
 %%
 
 int main(void) {

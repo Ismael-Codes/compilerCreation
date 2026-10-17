@@ -188,7 +188,7 @@ int num_linea = 1;   /* contador de líneas para mensajes de error */
 %%
 
 int main(void) {
-    yyin  = fopen("programac.txt", "r+");
+    yyin = fopen("programac.txt", "r");
     yyout = fopen("out.txt", "w");
 
     if (!yyin)  { perror("No se pudo abrir programac.txt"); return 1; }
@@ -200,3 +200,4 @@ int main(void) {
     fclose(yyout);
     return 0;
 }
+

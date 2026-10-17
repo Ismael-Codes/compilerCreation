@@ -41,6 +41,21 @@ int num_linea = 1; /* Contador de lineas para reportar errores */
 * ============================================================ */
 [a-zA-Z_][a-zA-Z0-9_]* { fprintf(yyout, "VARIABLE "); }
 
+/* ============================================================
+     * 5. OPERADORES Y SIMBOLOS
+     * ============================================================ */
+"+"                 { fprintf(yyout, "SUMA "); }
+"-"                 { fprintf(yyout, "RESTA "); }
+"*"                 { fprintf(yyout, "MULT "); }
+"/"                 { fprintf(yyout, "DIV "); }
+"=="                { fprintf(yyout, "IGUAL "); }
+"="                 { fprintf(yyout, "ASIGNACION "); }
+"<"                 { fprintf(yyout, "MENOR "); }
+">"                 { fprintf(yyout, "MAYOR "); }
+";"                 { fprintf(yyout, "PUNTOYCOMA "); }
+
+/////
+
 %%
 
 int main(void) {

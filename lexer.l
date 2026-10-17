@@ -36,7 +36,10 @@ int num_linea = 1; /* Contador de lineas para reportar errores */
 '.'                 { fprintf(yyout, "CARACTER "); }
 \"[^\"]*\"          { fprintf(yyout, "CADENA "); }
 
-//////
+/* ============================================================
+* 4. VARIABLES
+* ============================================================ */
+[a-zA-Z_][a-zA-Z0-9_]* { fprintf(yyout, "VARIABLE "); }
 
 %%
 

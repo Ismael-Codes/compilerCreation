@@ -1,5 +1,5 @@
 Ent edad = 20;
-Ndp promedio = 9.1;
+Npd promedio = 9.1;
 let grupo = 'A';
 logic inscrito = true;
 edad = edad + 1;
